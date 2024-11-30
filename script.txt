@@ -1,0 +1,57 @@
+TOPIC: Deploy Django app using Docker, docker-compose on AWS ECR and Apprunner
+
+
+STEPS:
+  1) create dockerfile and docker-compose.yml in the root directory
+    
+
+ Steps to perform on ec2 instance (ubuntu)
+  	- sudo apt update 
+  	- sudo apt upgrade
+  	- sudo apt install -y python3 python3-pip python3-venv
+  	- sudo su 
+  	- git clone https://github.com/GaneshJC0/django-apprunner.git
+  	-  ls
+  	-  cd django-apprunner/
+  	- python3 -m venv env
+  	- source env/bin/activate
+  	- pip install -r requirements.txt
+  	- python manage.py runserver 0.0.0.0:8000
+
+
+ 
+
+
+  Steps to install docker on ec2 ubuntu
+  
+	- sudo apt update
+	- sudo apt install apt-transport-https ca-certificates curl software-properties-common
+	- curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+	- echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	
+	- sudo apt update
+	- sudo apt install docker-ce docker-ce-cli containerd.io
+	- sudo systemctl start docker
+	- sudo systemctl enable docker
+	- sudo docker --version
+ 	- sudo curl -L "https://github.com/docker/compose/releases/download/$(curl -s https://api.github.com/repos/docker/compose/releases/latest | jq -r .tag_name)/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+ 	
+	- sudo chmod +x /usr/local/bin/docker-compose
+ 	- docker-compose --version
+ 	
+   Now build the image 
+ 
+	 - docker-compose up --build
+
+   Steps to install AWS cli on ec2
+	
+	- sudo snap install aws-cli --classic
+
+	- aws configure  
+
+Iam user policy : AmazonEC2ContainerRegistryFullAccess , AmazonEC2ContainerRegistryReadOnly 
+ 
+ 
+ 
+
+   
