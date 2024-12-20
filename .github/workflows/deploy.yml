@@ -28,7 +28,7 @@ jobs:
       - name: Build
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          ECR_REPOSITORY: django-deploy
+          ECR_REPOSITORY: demo
           IMAGE_TAG: latest
 
         run: |
